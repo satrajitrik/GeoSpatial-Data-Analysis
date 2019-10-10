@@ -2,7 +2,7 @@ from pyspark.ml.clustering import KMeans
 from pyspark.ml.feature import VectorAssembler
 
 
-def kmeans(coordinates_list):
+def kmeans(coordinates_list, spark):
     coordinates_list = [
         [float(coordinates[0]), float(coordinates[1])]
         for coordinates in coordinates_list

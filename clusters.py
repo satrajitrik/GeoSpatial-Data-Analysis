@@ -1,3 +1,4 @@
+from pyspark.ml.clustering import KMeans
 from pyspark.ml.feature import VectorAssembler
 
 

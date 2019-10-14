@@ -4,10 +4,12 @@ from pyspark.ml.feature import VectorAssembler
 from pyspark.sql import SparkSession
 
 
-def start():
+def main():
     spark = SparkSession.builder.appName("GeoSpatial Data Analysis").getOrCreate()
     coordinates_list = TaxiTrips(spark).get_coordinates_list()
 
-    clusters.kmeans(coordinates_list, spark)
+    predictions = clusters.kmeans(coordinates_list, spark)
 
-start()
+
+if __name__ == "__main__":
+    main()

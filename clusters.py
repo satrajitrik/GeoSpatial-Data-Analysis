@@ -1,5 +1,6 @@
 from pyspark.ml.clustering import KMeans
 from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.evaluation import ClusteringEvaluator
 
 
 def kmeans(coordinates_list, spark):
@@ -13,10 +14,19 @@ def kmeans(coordinates_list, spark):
         inputCols=["Longitude", "Latitude"], outputCol="features"
     )
     new_df = vecAssembler.transform(df)
-    new_df.show()
 
-    kmeans = KMeans(k=2, seed=1)  # 2 clusters here
-    model = kmeans.fit(new_df.select("features"))
+    silhouettes = []
+    for k in range(2, 10):
+        kmeans = KMeans().setK(k).setSeed(1)
+        model = kmeans.fit(new_df.select("features"))
+        predictions = model.transform(new_df)
 
-    transformed = model.transform(new_df)
-    transformed.show()
+        evaluator = ClusteringEvaluator()
+        silhouette = evaluator.evaluate(predictions)
+        silhouettes.append([silhouette, predictions, k])
+
+    _, predictions, k = min(silhouettes, key=lambda x: x[0])
+
+    predictions.show()
+
+    return predictions

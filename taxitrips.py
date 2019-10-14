@@ -1,14 +1,17 @@
 from ast import literal_eval as make_tuple
+from config import Config
+
 
 # Path = dbfs:/FileStore/tables/yellow_trip_sample_100000.csv
 # For now getting file from local rather than DBFS
+
 
 class TaxiTrips(object):
     def __init__(self, spark):
         self.df = (
             spark.read.format("com.databricks.spark.csv")
             .options(header="true", delimiter=";", inferschema="true")
-            .load("/Users/satrajitmaitra/Downloads/CSE512-Project-Phase2-Template/src/resources/yellow_trip_sample_100000.csv")
+            .load(Config().read_path)
         )
 
     def show_data(self):

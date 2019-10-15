@@ -1,6 +1,7 @@
 import clusters
+import visualizer
+
 from taxitrips import TaxiTrips
-from pyspark.ml.feature import VectorAssembler
 from pyspark.sql import SparkSession
 
 
@@ -9,6 +10,8 @@ def main():
     coordinates_list = TaxiTrips(spark).get_coordinates_list()
 
     predictions = clusters.kmeans(coordinates_list, spark)
+
+    visualizer.display(predictions)
 
 
 if __name__ == "__main__":

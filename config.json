@@ -1,3 +1,6 @@
 {
-	"PATH": "/Users/satrajitmaitra/Downloads/CSE512-Project-Phase2-Template/src/resources/yellow_trip_sample_100000.csv"
+	"CSV_PATH": "/Users/satrajitmaitra/Downloads/CSE512-Project-Phase2-Template/src/resources/yellow_trip_sample_100000.csv",
+	"DATA_FOLDER_PATH": "/Users/satrajitmaitra/GeoSpatial-Data-Analysis/data",
+	"PARQUET_FILE_PATH": "/Users/satrajitmaitra/GeoSpatial-Data-Analysis/data/nyc_taxitrip_data",
+	"SHAPEFILE_PATH": "/Users/satrajitmaitra/Downloads/Borough Boundaries/geo_export_47950b12-a4cd-49ab-8516-060205455c48.shp"
 }

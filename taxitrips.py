@@ -2,20 +2,16 @@ from ast import literal_eval as make_tuple
 from config import Config
 
 
-# Path = dbfs:/FileStore/tables/yellow_trip_sample_100000.csv
-# For now getting file from local rather than DBFS
-
-
 class TaxiTrips(object):
+    """
+        Reading from parquet because of lazy execution
+    """
+
     def __init__(self, spark):
-        self.df = (
-            spark.read.format("com.databricks.spark.csv")
-            .options(header="true", delimiter=";", inferschema="true")
-            .load(Config().read_path)
-        )
+        self.df = Config().get_df_from_parquet(spark)
 
     def show_data(self):
-        display(df)
+        display(self.df)
 
     def get_coordinates_list(self):
         return [

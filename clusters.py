@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 from pyspark.ml.clustering import KMeans
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.evaluation import ClusteringEvaluator
@@ -25,8 +27,9 @@ def kmeans(coordinates_list, spark):
         silhouette = evaluator.evaluate(predictions)
         silhouettes.append([silhouette, predictions, k])
 
-    _, predictions, k = min(silhouettes, key=lambda x: x[0])
+    _, predictions, k = max(silhouettes, key=lambda x: x[0])
 
     predictions.show()
+    print(k)
 
     return predictions
